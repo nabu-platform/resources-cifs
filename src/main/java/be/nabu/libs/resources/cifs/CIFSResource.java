@@ -1,15 +1,16 @@
 package be.nabu.libs.resources.cifs;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLConnection;
 
 import jcifs.smb.SmbFile;
+import be.nabu.libs.resources.api.LocatableResource;
 import be.nabu.libs.resources.api.Resource;
 import be.nabu.libs.resources.api.ResourceContainer;
-import be.nabu.libs.resources.api.ResourceRoot;
 
-public class CIFSResource implements Resource, ResourceRoot {
+public class CIFSResource implements Resource, Closeable, LocatableResource {
 
 	private SmbFile file;
 	private ResourceContainer<?> parent;

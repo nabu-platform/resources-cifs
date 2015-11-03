@@ -10,8 +10,8 @@ import java.util.List;
 import jcifs.smb.NtlmPasswordAuthentication;
 import jcifs.smb.SmbException;
 import jcifs.smb.SmbFile;
+import be.nabu.libs.resources.api.Resource;
 import be.nabu.libs.resources.api.ResourceResolver;
-import be.nabu.libs.resources.api.ResourceRoot;
 import be.nabu.libs.resources.api.principals.BasicPrincipal;
 import be.nabu.libs.resources.api.principals.DomainBasicPrincipal;
 
@@ -31,7 +31,7 @@ public class CIFSResourceResolver implements ResourceResolver {
 	private static List<String> defaultSchemes = Arrays.asList(new String[] { "smb", "cifs", "samba" });
 
 	@Override
-	public ResourceRoot getResource(URI uri, Principal principal) {
+	public Resource getResource(URI uri, Principal principal) {
 		try {
 			String domain = null;
 			String user = null;
