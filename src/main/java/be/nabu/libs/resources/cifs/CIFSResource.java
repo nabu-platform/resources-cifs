@@ -69,7 +69,7 @@ public class CIFSResource implements Resource, Closeable, LocatableResource {
 	}
 
 	@Override
-	public URI getURI() {
+	public URI getUri() {
 		return uri;
 	}
 

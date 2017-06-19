@@ -29,7 +29,7 @@ public class CIFSDirectory extends CIFSResource implements ManageableContainer<C
 			if (!file.exists()) {
 				return null;
 			}
-			return file.isFile() ? new CIFSFile(URIUtils.getChild(getURI(), name), this, file) : new CIFSDirectory(URIUtils.getChild(getURI(), name), this, file);
+			return file.isFile() ? new CIFSFile(URIUtils.getChild(getUri(), name), this, file) : new CIFSDirectory(URIUtils.getChild(getUri(), name), this, file);
 		}
 		catch (MalformedURLException e) {
 			throw new RuntimeException(e);
@@ -47,7 +47,7 @@ public class CIFSDirectory extends CIFSResource implements ManageableContainer<C
 		List<CIFSResource> children = new ArrayList<CIFSResource>();
 		try {
 			for (SmbFile child : getFile().listFiles()) {
-				children.add(child.isFile() ? new CIFSFile(URIUtils.getChild(getURI(), child.getName()), this, child) : new CIFSDirectory(URIUtils.getChild(getURI(), child.getName()), this, child));	
+				children.add(child.isFile() ? new CIFSFile(URIUtils.getChild(getUri(), child.getName()), this, child) : new CIFSDirectory(URIUtils.getChild(getUri(), child.getName()), this, child));	
 			}
 		}
 		catch (SmbException e) {
@@ -64,11 +64,11 @@ public class CIFSDirectory extends CIFSResource implements ManageableContainer<C
 		SmbFile smbFile = new SmbFile(getFile(), name);
 		if (Resource.CONTENT_TYPE_DIRECTORY.equals(contentType)) {
 			smbFile.mkdir();
-			return new CIFSFile(URIUtils.getChild(getURI(), name), this, smbFile);
+			return new CIFSFile(URIUtils.getChild(getUri(), name), this, smbFile);
 		}
 		else {
 			smbFile.createNewFile();
-			return new CIFSDirectory(URIUtils.getChild(getURI(), name), this, smbFile);
+			return new CIFSDirectory(URIUtils.getChild(getUri(), name), this, smbFile);
 		}
 	}
 
