@@ -7,10 +7,11 @@ import java.net.URLConnection;
 
 import jcifs.smb.SmbFile;
 import be.nabu.libs.resources.api.LocatableResource;
+import be.nabu.libs.resources.api.RenameableResource;
 import be.nabu.libs.resources.api.Resource;
 import be.nabu.libs.resources.api.ResourceContainer;
 
-public class CIFSResource implements Resource, Closeable, LocatableResource {
+public class CIFSResource implements Resource, Closeable, LocatableResource, RenameableResource {
 
 	private SmbFile file;
 	private ResourceContainer<?> parent;
@@ -76,5 +77,16 @@ public class CIFSResource implements Resource, Closeable, LocatableResource {
 	@Override
 	public void close() throws IOException {
 		// do nothing?
+	}
+
+	@Override
+	public void rename(String name) throws IOException {
+		CIFSDirectory parent = (CIFSDirectory) getParent();
+		if (parent == null) {
+			throw new IOException("Can only rename files that have a parent currently");
+		}
+		SmbFile newFile = new SmbFile(parent.getFile(), name);
+		file.renameTo(newFile);
+		file = newFile;
 	}
 }

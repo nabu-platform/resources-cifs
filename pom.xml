@@ -33,6 +33,10 @@
 			<artifactId>resources-api</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>be.nabu.libs.authentication</groupId>
+			<artifactId>authentication-api</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>jcifs</groupId>
 			<artifactId>jcifs</artifactId>
 			<version>1.3.17</version>

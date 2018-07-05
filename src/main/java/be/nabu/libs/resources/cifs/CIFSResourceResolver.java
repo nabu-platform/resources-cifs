@@ -10,10 +10,10 @@ import java.util.List;
 import jcifs.smb.NtlmPasswordAuthentication;
 import jcifs.smb.SmbException;
 import jcifs.smb.SmbFile;
+import be.nabu.libs.authentication.api.principals.BasicPrincipal;
+import be.nabu.libs.authentication.api.principals.NTLMPrincipal;
 import be.nabu.libs.resources.api.Resource;
 import be.nabu.libs.resources.api.ResourceResolver;
-import be.nabu.libs.resources.api.principals.BasicPrincipal;
-import be.nabu.libs.resources.api.principals.DomainBasicPrincipal;
 
 /**
  * Important: I had some problems with a particular client where i had an UNC:
@@ -43,8 +43,8 @@ public class CIFSResourceResolver implements ResourceResolver {
 				user = index < 0 ? uri.getUserInfo() : uri.getUserInfo().substring(0, index);
 				password = index < 0 ? null : uri.getUserInfo().substring(index + 1);
 			}
-			else if (principal instanceof DomainBasicPrincipal) {
-				DomainBasicPrincipal domainPrincipal = (DomainBasicPrincipal) principal;
+			else if (principal instanceof NTLMPrincipal) {
+				NTLMPrincipal domainPrincipal = (NTLMPrincipal) principal;
 				domain = domainPrincipal.getDomain();
 				user = domainPrincipal.getName();
 				password = domainPrincipal.getPassword();
